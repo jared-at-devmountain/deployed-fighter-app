@@ -7,13 +7,17 @@ run `npm install` in the terminal in the completed-code directory
 
 run `nodemon` (or a daemon) in the terminal in the completed-code directory
 
-Seed the database by copying the code in server/seed.sql and running it
+Seed the database by copying the code in seed.sql and running it
 in your database (this could be by using your database management company's
 SQL runner available on their website).
 
-open public/index.html in your browser
-(you could do this with live server)
-(you may need to refresh the page once when it loads)
+Only if you are running locally:
+run `localhost:<your .env port number>` in your browser.
+
+Only if your app is deployed:
+visit the IP address or domain of your deployed site.
+Make sure your remote server is routing port 80 traffic to
+the port specified in your .env file.
 
 To demo the app:
  1. input at least one fighter
