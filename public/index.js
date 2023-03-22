@@ -37,7 +37,7 @@ fform.addEventListener('submit', (event) => {
         type: ftype.value
     }
 
-    axios.post('http://localhost:4000/fighter', maBod)
+    axios.post('/fighter', maBod)
     .then((result) => {
         getFighterList()
     })
@@ -70,7 +70,7 @@ wform.addEventListener('submit', (event) => {
         owner: wowner.value
     }
 
-    axios.post('http://localhost:4000/weapon', maBod)
+    axios.post('/weapon', maBod)
     .then((result) => {
         updateData()
     })
@@ -91,7 +91,7 @@ wform.addEventListener('submit', (event) => {
 function getFighterList() {
     wformHider.classList.remove('hide')
 
-    axios.get('http://localhost:4000/fighters-list')
+    axios.get('/fighters-list')
     .then((result) => {
         populateWformDropdown(result.data)
         if (result.data.length > 0) {
@@ -129,7 +129,7 @@ function updateData() {
     spinner.classList.remove('hide')
     let startMs = new Date().getTime()
 
-    axios.get('http://localhost:4000/fighters-and-weapons')
+    axios.get('/fighters-and-weapons')
     .then((result) => {
         let endMs = new Date().getTime()
 
@@ -239,7 +239,7 @@ function showDataOnPage(rawDbData) {
                     event.target.parentElement.remove()
                 }
 
-                axios.delete('http://localhost:4000/weapon/' + weaponId)
+                axios.delete('/weapon/' + weaponId)
                 .then(() => {
                     setTimeout(() => {
                         if (fwDataSection.innerHTML === '') {
