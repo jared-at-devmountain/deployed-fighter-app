@@ -18,9 +18,18 @@ module.exports = {
     
         sequelize.query(`
             INSERT INTO fighters (name, power, hp, type)
-            VALUES ('${name}', ${power}, ${hp}, '${type}')
+            VALUES (:name, :power, :hit_points, :type)
             RETURNING *;
-        `)
+        `,
+            {
+                replacements: {
+                    name: name,
+                    power: power,
+                    hit_points: hp,
+                    type: type
+                }
+            }
+        )
         .then((dbResult) => {
             res.status(200).send(dbResult[0])
         })
@@ -35,9 +44,17 @@ module.exports = {
     
         sequelize.query(`
             INSERT INTO weapons (name, power, owner_id)
-            VALUES ('${name}', ${power}, ${owner})
+            VALUES (:name, :power, :owner)
             RETURNING *;
-        `)
+        `,
+            {
+                replacements: {
+                    name: name,
+                    power: power,
+                    owner: owner
+                }
+            }
+        )
         .then((dbResult) => {
             res.status(200).send(dbResult[0])
         })
@@ -89,8 +106,14 @@ module.exports = {
 
         sequelize.query(`
             DELETE FROM weapons
-            WHERE id = ${id};
-        `)
+            WHERE id = :id;
+        `,
+            {
+                replacements: {
+                    id: id
+                }
+            }
+        )
         .then((dbResult) => {
             res.status(200).send(dbResult[0])
         })
